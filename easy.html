@@ -274,7 +274,7 @@
           transition: right 0.5s ease; /* Animation for sliding in */
           }
           
-          
+
           /* When the settings panel is shown, it will slide in */
           .settings-column.show {
           right: 0;
@@ -398,6 +398,7 @@
     <a href="game.html"><button id="home-button">🏠︎HOME</button></a>
     <div id="leaderboard"></div>
     <!-- Settings Button -->
+
 <button id="settingsButton" onclick="toggleSettings()">⚙️</button>
 
 <!-- Settings Column -->
@@ -414,6 +415,7 @@
         <img src="img/profile1.jpeg
 " alt="Profile" onclick="alert('Profile clicked!')">
         <button onclick="window.location.href='login.html'">Login</button>
+
         <button onclick="window.location.href='login.html'">Sign Up</button>
     </div>
 </div>
@@ -496,6 +498,7 @@ function startGame() {
     seconds = 60; // Start with 60 seconds
     lockBoard = false;
     cards = [];
+    
     shuffle(cardImages);
     const gameContainer = document.getElementById('game-container');
     gameContainer.innerHTML = '';
