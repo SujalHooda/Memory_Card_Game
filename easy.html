@@ -498,7 +498,7 @@ function startGame() {
     seconds = 60; // Start with 60 seconds
     lockBoard = false;
     cards = [];
-    
+
     shuffle(cardImages);
     const gameContainer = document.getElementById('game-container');
     gameContainer.innerHTML = '';
@@ -569,6 +569,7 @@ function saveScore(score, time, moves) {
     leaderboard = leaderboard.slice(0, 5); // Keep only the top 5 scores
     localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
 }
+
 
 function displayLeaderboard() {
     const leaderboardDisplay = document.getElementById('leaderboard');
