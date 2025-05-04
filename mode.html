@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="charset" content="UTF-8">
+    <meta name="keywords" content="html, javascript, css">
+    <meta name="author" content="Suhani Garg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Card Game</title>
+    <style>
+        
+body {
+    
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  .video-background {
+    position: absolute;
+    top: 59%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -1;
+    transform: translate(-50%, -50%);
+  }
+  #toggleButton{
+    position: absolute;
+    background-color: #011b36;
+    font-size: 20px;
+  }
+	button {
+		background-color: #8cacf5;
+		color: #ffffff;
+		padding: 10px 20px;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+
+	button:hover {
+		background-color: #8cacf5;
+	}
+#single-player-btn{
+    position: absolute;
+    top: 38%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-size: 24px;
+    padding: 10px 20px;
+    border:none;
+    border-radius: 10px;
+    background-color: #011b36;
+    color: cadetblue;
+    cursor:pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    transition-duration: 0.5s;
+    transition-property: all;
+}
+#single-player-btn:hover {
+    background-color: #001b5b;
+    transition-timing-function: ease-in-out;
+    font-size: 28px;
+}
+#single-player-btn:active {
+  background-color: #2e6da4;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+#multiplayer-btn {
+        position: absolute;
+        top: 48%;
+        left: 48%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        font-size: 24px;
+        padding: 10px 20px;
+        border:none;
+        border-radius: 10px;
+        background-color: #011b36;
+        color: cadetblue;
+        cursor:pointer;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        transition-duration: 0.5s;
+        transition-property: all;
+}
+#multiplayer-btn:hover {
+        background-color: #001b5b;
+        transition-timing-function: ease-in-out;
+        font-size: 28px;
+}
+#multiplayer-btn :active {
+      background-color: #2e6da4;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+ /* Settings Column initially hidden */
+ .settings-column {
+  position: absolute;
+  top: 10px;
+  right: -250px; /* Initially hide the column to the right */
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  width: 250px;
+  height: 100%;
+  transition: right 0.5s ease; /* Animation for sliding in */
+  }
+  
+  .settings-column h3 {
+  text-align: center;
+  }
+  
+  .settings-column button {
+  background-color: #011b36;
+  color: cadetblue;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  }
+  
+  .settings-column button:hover {
+  background-color: #5551d2;
+  }
+  
+  .settings-column button:active {
+  background-color: #2e6da4;
+  }
+  .settings-column {
+  position: absolute;
+  top: 10px;
+  right: -250px; /* Initially hide the column off-screen */
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  width: 250px;
+  height: 100%;
+  transition: right 0.5s ease; /* Animation for sliding in */
+  }
+  
+  /* When the settings panel is shown, it will slide in */
+  .settings-column.show {
+  right: 0;
+  }
+  .settings-column {
+  position: absolute;
+  top: 10px;
+  right: -250px; /* Initially hide the column off-screen */
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  width: 250px;
+  height: 300px;
+  transition: right 0.5s ease; /* Animation for sliding in */
+  display: none; /* Hidden by default */
+  }
+  
+  .settings-column.show-settings {
+  display: block; /* Make the column visible when the class is added */
+  right: 0px; /* Slide the settings panel in from the right */
+  }
+  #settingsButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #011b36;
+  color: cadetblue;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  transition: background-color 0.3s ease;
+  }
+  
+  #settingsButton:hover {
+  background-color: #5551d2;
+  }
+  
+  #settingsButton:active {
+  background-color: #2e6da4;
+  }
+  
+  
+  /* Profile and Login Section */
+  .profile-section {
+  margin-top: 10px;
+  text-align: center;
+  }
+  
+  .profile-section img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #011b36;
+  cursor: pointer;
+  margin-bottom: 10px;
+  }
+  
+  .profile-section button {
+  background-color: #011b36;
+  color: cadetblue;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  }
+  
+  .profile-section button:hover {
+  background-color: #5551d2;
+  }
+  
+  .profile-section button:active {
+  background-color: #2e6da4;
+  }
+  
+  /* Settings Button */
+  #settingsButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #011b36;
+  color: cadetblue;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  transition: background-color 0.3s ease;
+  }
+  
+  #settingsButton:hover {
+  background-color: #5551d2;
+  }
+  
+  #settingsButton:active {
+  background-color: #2e6da4;
+  }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const audio = document.getElementById('audio');
+            const button = document.getElementById('toggleButton');
+          
+            button.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play();
+                    button.textContent = '🔊';
+                } else {
+                    audio.pause();
+                    button.textContent = '🔇';
+                }
+            });
+          });
+          function toggleSettings() {
+            const settingsColumn = document.getElementById('settingsColumn');
+            
+            // Toggle the "show-settings" class
+            settingsColumn.classList.toggle('show-settings');
+            
+            // Add event listener to close settings when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!settingsColumn.contains(e.target) && e.target !== settingsButton) {
+                settingsColumn.classList.remove('show-settings');
+            }
+        });
+        
+        // Prevent click event propagation on the settings column itself
+        settingsColumn.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+        
+        // Toggle the settings column when the settings button is clicked
+        settingsButton.addEventListener('click', toggleSettings);
+        }
+        
+        function toggleSettings() {
+            const settingsColumn = document.getElementById('settingsColumn');
+            const settingsButton = document.getElementById('settingsButton'); // Get the settings button
+        
+            // Toggle the "show-settings" class
+            settingsColumn.classList.toggle('show-settings');
+        
+            // If settings are visible, set up the event listener to close it when clicking outside
+            if (settingsColumn.classList.contains('show-settings')) {
+                document.addEventListener('click', closeSettingsOnClickOutside);
+            } else {
+                // Remove the listener if settings are hidden
+                document.removeEventListener('click', closeSettingsOnClickOutside);
+            }
+        
+            // Prevent click event propagation on the settings column itself
+            settingsColumn.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
+        function closeSettingsOnClickOutside(e) {
+            const settingsColumn = document.getElementById('settingsColumn');
+            const settingsButton = document.getElementById('settingsButton');
+            
+            if (!settingsColumn.contains(e.target) && e.target !== settingsButton) {
+                settingsColumn.classList.remove('show-settings');
+                document.removeEventListener('click', closeSettingsOnClickOutside); // Remove the listener
+            }
+        }
+    </script>
+</head>
+<body>
+    <audio id="audio" src="music/houseofdragons.mp3" preload="auto"></audio>
+    <button id="toggleButton">🔊</button>
+
+        <a href="level.html"><button id="single-player-btn">ᏕᎨᏁᎶᏝᎬ ᏢᏝᎯᎽᎬᏒ</button></a>
+        <button id="multiplayer-btn">ᎷᏬᏝᎿᎨ ᏢᏝᎯᎽᎬᏒ</button>
+        <video autoplay muted loop class="video-background">
+            <source src="bgvideo2.mp4" type="video/mp4">
+        </video>
+   <!-- Settings Button -->
+<button id="settingsButton" onclick="toggleSettings()">⚙️</button>
+
+<!-- Settings Column -->
+<div class="settings-column" id="settingsColumn">
+    <h3>Settings</h3>
+    <label for="musicSelect">Music:</label>
+    <select id="musicSelect">
+        <option value="music/houseofdragons.mp3">House of Dragons</option>
+        <option value="music/newSong.mp3">New Song</option>
+        <option value="music/backgroundMusic.mp3">Background Music</option>
+    </select>
+
+    <div class="profile-section">
+        <img src="img/profile1.jpeg" alt="Profile" onclick="alert('Profile clicked!')">
+        <button onclick="window.location.href='login.html'">Login</button>
+        <button onclick="window.location.href='login.html'">Sign Up</button>
+    </div>
+   
+</body>
+</html>
