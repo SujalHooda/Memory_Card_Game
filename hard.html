@@ -163,7 +163,7 @@
           text-align: center;
           font-size: 22px;
           font-weight: 700;
-          
+
           cursor: pointer;
           border-radius: 12px;
           box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
@@ -407,7 +407,7 @@
     </select>
 
     <div class="profile-section">
-        <img src="img/profile1.jpeg" alt="Profile" onclick="alert('Profile clicked!')">
+        <img src= "img/profile1.jpeg" alt="Profile" onclick="alert('Profile clicked!')">
         <button onclick="window.location.href='login.html'">Login</button>
         <button onclick="window.location.href='login.html'">Sign Up</button>
     </div>
@@ -444,6 +444,7 @@
         card.addEventListener('click', flipCard);
         return card;
         }
+        
         
         function flipCard() {
         if (lockBoard || this === firstCard) return;
