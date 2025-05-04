@@ -583,7 +583,7 @@ function displayLeaderboard() {
         leaderboardDisplay.appendChild(entryDiv);
     });
     
-    
+
     leaderboardDisplay.addEventListener('click', () => {
         leaderboardDisplay.classList.remove('show-leaderboard'); // Hide leaderboard on click
     });
@@ -604,6 +604,7 @@ function toggleSettings() {
             // Remove the listener if settings are hidden
             document.removeEventListener('click', closeSettingsOnClickOutside);
         }
+        
 
         // Prevent click event propagation on the settings column itself
         settingsColumn.addEventListener('click', (e) => {
