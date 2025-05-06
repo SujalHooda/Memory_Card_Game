@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Immortal Login and Register</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #111;
+      overflow: hidden;
+      position: relative;
+      color: white;
+    }
+
+
+    .background {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      z-index: -1;
+      transform: translate(-50%, -50%);
+    }
+
+
+    .auth-container {
+      position: absolute;
+      top: 10%;
+      left: -2%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .auth-box {
+      background: rgba(0, 0, 0, 0.7);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      width: 380px;
+      padding: 30px;
+      transform: scale(1);
+      background-color: #011b36;
+      transition: transform 0.3s ease-in-out;
+      border: 2px solid #444;
+      backdrop-filter: blur(10px);
+    }
+
+    .auth-box:hover {
+      transform: scale(1.05);
+    }
+
+    .auth-toggle {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+
+    .toggle-btn {
+      background-color: transparent;
+      border: 2px solid rgb(0, 96, 144);
+      color: rgb(0, 96, 144);
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .toggle-btn:hover {
+      background-color: rgb(0, 96, 144);
+      color: black;
+    }
+
+    .auth-form {
+      display: none;
+    }
+
+    .auth-form h2 {
+      text-align: center;
+      color: rgb(191, 216, 251);
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 500;
+      text-shadow: 0px 0px 20px rgb(0, 96, 144);
+      animation: glowing 1.5s infinite ease-in-out;
+    }
+
+    @keyframes glowing {
+      0% {
+        text-shadow: 0 0 10px rgb(0, 96, 144), 0 0 20px rgb(0, 96, 144), 0 0 30px rgb(0, 96, 144), 0 0 40px rgb(0, 96, 144);
+      }
+      50% {
+        text-shadow: 0 0 20px rgb(0, 96, 144), 0 0 30px rgb(0, 96, 144), 0 0 40px rgb(0, 96, 144), 0 0 50px rgb(0, 96, 144);
+      }
+      100% {
+        text-shadow: 0 0 10px rgb(0, 96, 144), 0 0 20px rgb(0, 96, 144), 0 0 30px rgb(0, 96, 144), 0 0 40px rgb(0, 96, 144);
+      }
+    }
+
+    .auth-form input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #444;
+      font-size: 16px;
+      background: transparent;
+      color: white;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .auth-form input:focus {
+      border-color: cadetblue;
+      outline: none;
+      box-shadow: 0 0 10px cadetblue;
+    }
+
+    .auth-form .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: rgb(0, 96, 144);
+      color: black;
+      font-size: 18px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .auth-form .btn:hover {
+      background-color: rgb(3, 75, 111);
+    }
+
+    .auth-form .btn:active {
+      background-color: cadetblue;
+    }
+
+    /* Password Field Styling */
+    .password-field {
+      position: relative;
+    }
+
+    .eye-icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      cursor: pointer;
+      color: rgb(0, 96, 144);
+      transition: transform 0.3s ease;
+    }
+
+
+    .eye-icon:hover {
+      transform: translateY(-50%) scale(1.2);
+    }
+
+    /* Active Form */
+    .active {
+      display: block;
+    }
+
+    /* Transition effects */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    .auth-form {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated background -->
+  <video autoplay muted loop class="background">
+    <source src="bgvideo2.mp4" type="video/mp4">
+  </video>
+
+  
+  <div class="auth-container">
+    <div class="auth-box">
+      <div class="auth-toggle">
+        <button class="toggle-btn" id="toggle-login">LOGIN</button>
+        <button class="toggle-btn" id="toggle-register">REGISTER</button>
+      </div>
+      <!-- Login Form -->
+      <div id="login-form" class="auth-form">
+        <h2>LOGIN</h2>
+        <input type="text" placeholder="Username" id="login-username" required />
+        <div class="password-field">
+          <input type="password" placeholder="Password" id="login-password" required />
+          <span class="eye-icon" id="login-eye-icon">&#128065;</span>
+        </div>
+        <a href="game.html"><button class="btn" id="login-btn">LOGIN</button></a>
+      </div>
+      <!-- Register Form -->
+      <div id="register-form" class="auth-form">
+        <h2>Create Account</h2>
+        <input type="text" placeholder="Username" id="register-username" required />
+        <input type="email" placeholder="Email" id="register-email" required />
+        <div class="password-field">
+          <input type="password" placeholder="Password" id="register-password" required />
+          <span class="eye-icon" id="register-eye-icon">&#128065;</span>
+        </div>
+        <div class="password-field">
+          <input type="password" placeholder="Confirm Password" id="register-confirm-password" required />
+          <span class="eye-icon" id="register-confirm-eye-icon">&#128065;</span>
+        </div>
+        <button class="btn" id="register-btn">REGISTER</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const toggleLoginBtn = document.getElementById('toggle-login');
+    const toggleRegisterBtn = document.getElementById('toggle-register');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const registerPassword = document.getElementById('register-password');
+    const registerConfirmPassword = document.getElementById('register-confirm-password');
+    const loginPassword = document.getElementById('login-password');
+    
+    const loginEyeIcon = document.getElementById('login-eye-icon');
+    loginEyeIcon.addEventListener('click', () => {
+      if (loginPassword.type === 'password') {
+        loginPassword.type = 'text';
+        loginEyeIcon.innerHTML = '&#128065;';
+      } else {
+        loginPassword.type = 'password';
+        loginEyeIcon.innerHTML = '&#128064;';
+      }
+    });
+
+    const registerEyeIcon = document.getElementById('register-eye-icon');
+    const registerConfirmEyeIcon = document.getElementById('register-confirm-eye-icon');
+    
+    registerEyeIcon.addEventListener('click', () => {
+      if (registerPassword.type === 'password') {
+        registerPassword.type = 'text';
+        registerEyeIcon.innerHTML = '&#128065;';
+      } else {
+        registerPassword.type = 'password';
+        registerEyeIcon.innerHTML = '&#128064;';
+      }
+    });
+    document.getElementById('login-btn').addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent default form submission
+      
+      // Get values of username and password fields
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+    
+      // Check if both username and password are entered
+      if (username === "" || password === "") {
+        alert("Please enter both username and password.");
+        return; // Stop further execution
+      }
+      
+      // If validation passes, proceed with login (navigate or submit to server)
+      window.location.href = 'game.html';  // Redirect after successful login (you can replace this with an actual login request)
+    });
+    
+    registerConfirmEyeIcon.addEventListener('click', () => {
+      if (registerConfirmPassword.type === 'password') {
+        registerConfirmPassword.type = 'text';
+        registerConfirmEyeIcon.innerHTML = '&#128065;';
+      } else {
+        registerConfirmPassword.type = 'password';
+        registerConfirmEyeIcon.innerHTML = '&#128064;';
+      }
+    });
+
+    toggleLoginBtn.addEventListener('click', () => {
+      loginForm.classList.add('active');
+      registerForm.classList.remove('active');
+      toggleLoginBtn.classList.add('active');
+      toggleRegisterBtn.classList.remove('active');
+    });
+
+    toggleRegisterBtn.addEventListener('click', () => {
+      registerForm.classList.add('active');
+      loginForm.classList.remove('active');
+      toggleRegisterBtn.classList.add('active');
+      toggleLoginBtn.classList.remove('active');
+    });
+
+    // Validation before submission
+    document.getElementById('register-btn').addEventListener('click', (event) => {
+      event.preventDefault();
+      if (registerPassword.value !== registerConfirmPassword.value) {
+        alert('Passwords do not match!');
+        return;
+      }
+      // Proceed with registration (redirect or submit to server)
+      window.location.href = 'game.html';  // Redirect after successful registration
+    });
+
+    // Initially show the Login form
+    document.addEventListener('DOMContentLoaded', () => {
+      loginForm.classList.add('active');
+      toggleLoginBtn.classList.add('active');
+    });
+  </script>
+</body>
+</html>
